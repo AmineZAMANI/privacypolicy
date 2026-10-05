@@ -184,12 +184,14 @@
       <p class="tag">Le hez 2 des cafés marocains</p>
       <p class="ar" lang="ar" dir="rtl">هز جوج — لعبة الكارطة المغربية</p>
 
-      <!-- Le bouton App Store est écrit en dur : il s'affiche dès le chargement, sans attendre le script. -->
+      <!-- Boutons écrits en dur, dans cet ordre : App Store d'abord (toujours), puis Meta Horizon Store.
+           Ils s'affichent dès le chargement, sans attendre le script. -->
       <div class="cta" id="cta">
         <div class="badges">
           <a class="badge" href="https://apps.apple.com/app/hez-jouj-moroccan-card-game/id6816143591"><img class="b-apple" alt="Télécharger Hez Jouj dans l'App Store" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/fr-fr?size=250x83"></a>
+          <a class="badge b-casque" href="https://www.meta.com/experiences/hez-jouj/1284279268110288/" aria-label="Hez Jouj sur le Meta Horizon Store"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="9" width="26" height="15" rx="6" fill="none" stroke="#fff" stroke-width="2"/><circle cx="11" cy="16.5" r="3" fill="#fff"/><circle cx="21" cy="16.5" r="3" fill="#fff"/><path d="M14.5 24c.5-1.6 2.5-1.6 3 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg><span><small>Disponible sur le</small><b>Meta Horizon Store</b></span></a>
         </div>
-        <p class="note">Gratuit sur iPhone · sans compte à créer</p>
+        <p class="note">Gratuit sur iPhone et sur Meta Quest</p>
       </div>
 
       <p class="lede">Pose ta carte, fais piocher les autres, vide ta main le premier.
@@ -321,32 +323,20 @@
     });
     if (MAGASINS.android.dispo) document.querySelector('[data-texte="android"]').textContent = "Sur Google Play.";
 
-    // Plateforme mise en avant : celle du visiteur si Hez Jouj y est déjà sorti, sinon l'iPhone.
-    // (iPhone et ordinateur : App Store ; casque Quest : Meta Horizon Store ; Android : App Store tant que Play attend.)
-    var principal = (os !== "ordi" && MAGASINS[os].dispo) ? os : "ios";
-    var cartes = document.querySelector(".plateformes");
-    var ici = document.querySelector('.pf[data-os="' + principal + '"]');
-    ici.classList.add("ici");
-    cartes.insertBefore(ici, cartes.firstChild);
-
-    // Le bouton App Store est déjà dans la page ; on ne le remplace que si le visiteur a mieux.
+    // Consigne d'Amine : le lien iOS reste toujours en avant. Les boutons du haut sont écrits
+    // en dur (App Store, puis Meta Horizon Store) et le script ne les remplace jamais.
+    // Il ajoute seulement Google Play, juste après l'App Store, le jour où l'app y sera.
     var cta = document.getElementById("cta");
-    if (principal !== "ios") {
-      var note = principal === "quest" ? "Gratuit · sans publicité ni achat" : "Gratuit · sans compte à créer";
-      cta.innerHTML = '<div class="badges">' + badge(principal) + '</div><p class="note">' + note + '</p>';
-    }
-    // Sur ordinateur, le Meta Horizon Store vient juste après l'App Store
-    // (sa fiche web permet d'installer le jeu directement dans le casque).
-    if (os === "ordi" && MAGASINS.quest.dispo && MAGASINS.quest.url) {
-      cta.querySelector(".badges").insertAdjacentHTML("beforeend", badge("quest"));
-      cta.querySelector(".note").textContent = "Gratuit sur iPhone et sur Meta Quest";
-    }
-    if (os === "android" && !MAGASINS.android.dispo) {
+    if (MAGASINS.android.dispo) {
+      cta.querySelector(".b-apple").parentNode.insertAdjacentHTML("afterend", badge("android"));
+      cta.querySelector(".note").textContent = "Gratuit sur iPhone, Android et Meta Quest";
+    } else if (os === "android") {
       cta.insertAdjacentHTML("beforeend", '<p class="autre">Sur Android, Hez Jouj arrive très bientôt sur Google Play.</p>');
     }
-    if (os === "quest" && !(MAGASINS.quest.dispo && MAGASINS.quest.url)) {
-      cta.insertAdjacentHTML("beforeend", '<p class="autre">Dans le casque : <a href="' + MAGASINS.quest.web + '">jouer maintenant dans le navigateur</a>.</p>');
-    }
+
+    // La carte de l'appareil du visiteur est soulignée, sans changer l'ordre (iPhone d'abord).
+    var ici = document.querySelector('.pf[data-os="' + (os === "ordi" ? "ios" : os) + '"]');
+    if (ici) ici.classList.add("ici");
   })();
 </script>
 </body>
