@@ -93,6 +93,7 @@
         <li>The time spent using the Service</li>
         <li>The operating system you use on your mobile device</li>
         <li>In games with an online mode: the nickname you choose for online games (chosen freely by you &mdash; please do not use your real name), a random anonymous player identifier, your connection status and the moves you play during an online game, and, if you use the in-game chat, the short messages you send (deleted automatically &mdash; see <em>In-game chat</em> below)</li>
+        <li>In games that offer voice messages, and only while you use the microphone button: the short voice recordings you choose to send to the players at your table (deleted once they have been heard &mdash; see <em>Voice messages</em> below)</li>
         <li>In games that offer notifications, and only if you allow them: a notification registration token for your installation (a device identifier, not linked to your name or e-mail address)</li>
       </ul>
       <p>The Service does not gather precise information about the location of your mobile device, and never asks you for location permission. Advertising networks may derive an <em>approximate</em> location &mdash; at the level of a city or a region, deduced from your IP address &mdash; in order to choose which advertisements to show; see <a href="#advertising">Advertising, and Apple devices</a> below.</p>
@@ -110,6 +111,7 @@
         <li><a href="https://firebase.google.com/terms/crashlytics/privacy-and-security" target="_blank">Firebase Crashlytics</a></li>
         <li><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase Authentication and Firebase Realtime Database</a> (online game modes)</li>
         <li><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase Cloud Messaging</a> (notifications)</li>
+        <li><a href="https://firebase.google.com/support/privacy" target="_blank">Cloud Storage for Firebase</a> (voice messages)</li>
         <li><a href="https://www.apple.com/legal/privacy/" target="_blank">Apple SKAdNetwork</a> (advertising attribution on iPhone and iPad)</li>
       </ul>
 
@@ -138,6 +140,16 @@
         <li><strong>Your controls</strong> &mdash; you can turn the chat off in the game menu, and block any player: their messages are hidden at once.</li>
       </ul>
 
+      <h3 id="voice-messages">Voice messages</h3>
+      <p>In <strong>Ronda 3D</strong> on Android, players at the same online table can send each other short voice messages: a few seconds each, three per game, plus one more for every 50 flouss (the game's virtual coins, earned by playing) in the player's balance, up to a limit. Nothing is spent to send them. Voice messages are not available on iPhone and iPad for now.</p>
+      <ul>
+        <li><strong>The microphone</strong> &mdash; is used only while you hold the microphone button, or between your first and your second tap on it. Nothing is recorded outside that gesture, nothing is recorded in the background, and the microphone is closed as soon as the message ends. The first time, the game shows the rules of voice messages, which you accept, and then Android asks for the microphone permission. You can withdraw that permission at any time in your phone's settings; the rest of the game keeps working.</li>
+        <li><strong>Cloud Storage for Firebase (Google, servers located in the United States)</strong> &mdash; holds the recording (compressed, a few kilobytes), filed under your anonymous player identifier. <strong>Firebase Realtime Database (Google, servers located in the European Union)</strong> carries a short entry for the players of your table: your seat, the number of the message, its length, a coarse outline of its loudness (used to draw it on screen) and a private link to the recording. Only the players of that table receive that link.</li>
+        <li><strong>Automatic deletion</strong> &mdash; each message is deleted, together with its entry, as soon as the players present at the table have heard it &mdash; normally within 30 seconds of being sent. Everything you sent is also deleted when the match ends or when you leave the table. As a safety net, an automatic rule deletes any recording left over within 48 hours, and no backup copy is kept. We keep no history of voice messages, and we never listen to, transcribe, analyse or use them for advertising or any other purpose.</li>
+        <li><strong>Respect and reports</strong> &mdash; insults, threats, hate speech and sexual content are forbidden. You can mute any player: you no longer hear them, and at a four-player table, two players muting the same person mute them for the whole table (at a two-player table, one is enough). When you report a player for their voice messages, the report contains the reason, the reported player's anonymous identifier and nickname, your anonymous identifier and the time (plus their last chat messages, as described under <em>In-game chat</em>); <strong>no recording is attached</strong>. Reports are used only for moderation, and a reported player can be banned from online play.</li>
+        <li><strong>Your controls</strong> &mdash; you can turn voice messages off in the game menu: you then neither send nor receive them, and nothing is downloaded. You can also block any player.</li>
+      </ul>
+
       <h3>Notifications</h3>
       <p>Some of our games &mdash; currently <strong>Ronda 3D</strong> &mdash; can send you notifications about the game itself: that a player is waiting alone in the online lobby, or that someone has opened a table with friends and shared its code, so that you can join that table in one tap.</p>
       <ul>
@@ -158,13 +170,24 @@
         <li><strong>Measurement.</strong> Google Analytics for Firebase sends measurement data to <code>app-measurement.com</code>. On Apple devices this address is declared as a tracking domain, which means it is contacted for tracking purposes only when you have allowed tracking.</li>
         <li><strong>Refusing changes nothing to the game.</strong> Whether you decline the European consent form, refuse tracking, or both, every feature stays available &mdash; including online play, private tables, leaderboards and notifications. Only the advertisements become non-personalised.</li>
       </ul>
-      <p>Our games are distributed on Google Play and on the Apple App Store. Apple and Google each apply their own privacy policy to the store itself; the present policy covers only what happens inside the games.</p>
+      <p>Our games are distributed on Google Play and on the Apple App Store, and Hez Jouj VR and Ronda 3D VR on the Meta Horizon Store. Apple, Google and Meta each apply their own privacy policy to their store; the present policy covers only what happens inside the games.</p>
+
+      <h3 id="hez-jouj-vr">Hez Jouj VR and Ronda 3D VR (Meta Quest)</h3>
+      <p id="ronda-3d-vr"><strong>Hez Jouj VR</strong> and <strong>Ronda 3D VR</strong> are the virtual-reality editions of Hez Jouj and Ronda 3D for Meta Quest headsets. They are free and contain <strong>no advertising, no in-app purchases and no analytics</strong>: none of the advertising and measurement services described above are present in them.</p>
+      <ul>
+        <li><strong>Online play.</strong> They use the same services as the other editions of each game, described under <em>Online Game Modes and Leaderboards</em>: Firebase Authentication (an anonymous identifier, no account to create) and Firebase Realtime Database (your nickname, your connection status and the moves of the game, visible to the players at your table). Players on Meta Quest and on phones can sit at the same tables. You can report or block a player from the game's menu.</li>
+        <li><strong>Your Meta account.</strong> The games do not read your Meta account: no name, e-mail address, friends list, avatar or profile picture. Your nickname is drawn at random by the game (it starts with &ldquo;VR_&rdquo;, so that other players know you play on a headset), and you can draw another one.</li>
+        <li><strong>Head, controllers and hands.</strong> The positions of your head, of your controllers and of your hands (when you play with hand tracking) are used by the headset in real time, on the device only, so that you can hold and play your cards. They are never recorded, stored, or sent to us or to anyone else.</li>
+        <li><strong>On the headset.</strong> Your settings (language, sound, the hand that holds the cards, house rules) and your nickname are stored on the headset only. Uninstalling the app, or clearing its data, deletes them.</li>
+        <li><strong>Deleting your online data.</strong> Online game records and unused anonymous accounts are deleted automatically, as described above. To have your data deleted sooner, write to <a href="mailto:zmi.amn@gmail.com">zmi.amn@gmail.com</a> with your nickname.</li>
+      </ul>
 
       <h3>Opt-Out Rights</h3>
       <p>You can stop all collection of information by the specific Application or Game easily by <strong>uninstalling it</strong>. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network.</p>
       <p>You may refuse notifications when your phone asks, or switch them off later in the game (Settings &rarr; Notifications) or in your phone's settings, without losing any other feature.</p>
+      <p>You may turn voice messages off in the game menu, and refuse or withdraw the microphone permission in your phone's settings, without losing any other feature.</p>
       <p>On <strong>iPhone and iPad</strong>, you may withdraw tracking permission at any time in <strong>Settings &rarr; Privacy &amp; Security &rarr; Tracking</strong>. In Europe, you may reopen the advertising consent form from the game's settings and change your answer. In both cases the game remains fully playable; only the advertisements become non-personalised.</p>
-      <p>You may stop using the online features at any time. <strong>To delete your leaderboard data yourself, open the game, go to Leaderboards &rarr; My account &rarr; &ldquo;Delete my data&rdquo;</strong>: your leaderboard row and your player ID are erased from our servers immediately. You can also have any data linked to your anonymous identifier deleted by contacting us at <a href="mailto:zmi.amn@gmail.com">zmi.amn@gmail.com</a>.</p>
+      <p>You may stop using the online features at any time. <strong>To delete your account yourself, open the game and go to Game options &rarr; My account &rarr; &ldquo;Delete my account&rdquo;</strong> (the same button is on the Online screen, under your nickname): your leaderboard row, your player ID, your nickname and your notification token are erased from our servers immediately, and your anonymous account is deleted. You can also have any data linked to your anonymous identifier deleted by contacting us at <a href="mailto:zmi.amn@gmail.com">zmi.amn@gmail.com</a>.</p>
 
       <h3>Data Retention Policy</h3>
       <p>The Service Provider will retain User Provided data for as long as you use the Applications and Games and for a reasonable time thereafter. If you'd like them to delete User Provided Data that you have provided via any of the Applications and Games, please contact them at <a href="mailto:zmi.amn@gmail.com">zmi.amn@gmail.com</a> and they will respond in a reasonable time.</p>
@@ -179,7 +202,7 @@
       <h3>Changes</h3>
       <p>This Privacy Policy may be updated from time to time for any reason. The Service Provider will notify you of any changes to the Privacy Policy by <strong>updating this page with the new Privacy Policy</strong>. You are advised to consult this Privacy Policy regularly for any changes, as continued use is deemed approval of all changes.</p>
 
-      <p class="effective-date">This privacy policy is effective as of <strong>2026-10-09</strong> (previous versions: 2026-09-23, 2026-09-19, 2026-09-09, 2025-11-12).</p>
+      <p class="effective-date">This privacy policy is effective as of <strong>2026-10-10</strong> (previous versions: 2026-10-09, 2026-09-23, 2026-09-19, 2026-09-09, 2025-11-12).</p>
 
       <h3>Your Consent</h3>
       <p>By using any of the Applications and Games, you are consenting to the processing of your information as set forth in this Privacy Policy now and as amended by us.</p>
