@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Hez Jouj — le hez 2 des cafés marocains</title>
-<meta name="description" content="Le hez 2 des cafés marocains en 3D : vraies cartes espagnoles, voix en darija, hors ligne ou en ligne. Gratuit sur iPhone et Meta Quest, bientôt sur Android.">
+<meta name="description" content="Le hez 2 des cafés marocains en 3D : vraies cartes espagnoles, voix en darija, hors ligne ou en ligne. Gratuit sur iPhone, Android et Meta Quest.">
 <link rel="canonical" href="https://aminezamani.github.io/privacypolicy/hezjouj/">
 <meta name="theme-color" content="#140c06">
 <meta property="og:title" content="Hez Jouj — le hez 2 des cafés marocains">
-<meta property="og:description" content="Pose, fais piocher, vide ta main le premier. Gratuit sur iPhone et Meta Quest, bientôt sur Android.">
+<meta property="og:description" content="Pose, fais piocher, vide ta main le premier. Gratuit sur iPhone, Android et Meta Quest.">
 <meta property="og:image" content="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/5f/22/e8/5f22e87f-a28f-8c58-1453-4657dc959524/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/512x512bb.jpg">
 <meta property="og:url" content="https://aminezamani.github.io/privacypolicy/hezjouj/">
 <meta property="og:type" content="website">
@@ -184,14 +184,15 @@
       <p class="tag">Le hez 2 des cafés marocains</p>
       <p class="ar" lang="ar" dir="rtl">هز جوج — لعبة الكارطة المغربية</p>
 
-      <!-- Boutons écrits en dur, dans cet ordre : App Store d'abord (toujours), puis Meta Horizon Store.
+      <!-- Boutons écrits en dur, dans cet ordre : App Store d'abord (toujours), Google Play, puis Meta Horizon Store.
            Ils s'affichent dès le chargement, sans attendre le script. -->
       <div class="cta" id="cta">
         <div class="badges">
           <a class="badge" href="https://apps.apple.com/app/hez-jouj-moroccan-card-game/id6816143591"><img class="b-apple" alt="Télécharger Hez Jouj dans l'App Store" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/fr-fr?size=250x83"></a>
+          <a class="badge" href="https://play.google.com/store/apps/details?id=com.yamano.hezjouj3d"><img class="b-play" alt="Disponible sur Google Play" src="https://play.google.com/intl/fr/badges/static/images/badges/fr_badge_web_generic.png"></a>
           <a class="badge b-casque" href="https://www.meta.com/experiences/hez-jouj/1284279268110288/" aria-label="Hez Jouj sur le Meta Horizon Store"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="9" width="26" height="15" rx="6" fill="none" stroke="#fff" stroke-width="2"/><circle cx="11" cy="16.5" r="3" fill="#fff"/><circle cx="21" cy="16.5" r="3" fill="#fff"/><path d="M14.5 24c.5-1.6 2.5-1.6 3 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg><span><small>Disponible sur le</small><b>Meta Horizon Store</b></span></a>
         </div>
-        <p class="note">Gratuit sur iPhone et sur Meta Quest</p>
+        <p class="note">Gratuit sur iPhone, Android et Meta Quest</p>
       </div>
 
       <p class="lede">Pose ta carte, fais piocher les autres, vide ta main le premier.
@@ -231,8 +232,8 @@
 
       <article class="pf" data-os="android">
         <div>
-          <h3>Android <span class="pastille" data-etat="android">Bientôt</span></h3>
-          <p data-texte="android">Sur Google Play, très bientôt.</p>
+          <h3>Android <span class="pastille ok" data-etat="android">Disponible</span></h3>
+          <p data-texte="android">Sur Google Play.</p>
         </div>
         <div class="action" data-badge="android"></div>
       </article>
@@ -272,7 +273,7 @@
      (quest : en ligne sur le Meta Horizon Store depuis le 30/09/2026.) */
   var MAGASINS = {
     ios:     { dispo: true,  url: "https://apps.apple.com/app/hez-jouj-moroccan-card-game/id6816143591" },
-    android: { dispo: false, url: "https://play.google.com/store/apps/details?id=com.yamano.hezjouj3d" },
+    android: { dispo: true,  url: "https://play.google.com/store/apps/details?id=com.yamano.hezjouj3d" },
     quest:   { dispo: true,  url: "https://www.meta.com/experiences/hez-jouj/1284279268110288/", web: "https://hez-jouj-3d.web.app/" }
   };
 
@@ -315,6 +316,15 @@
     var os = quest ? "quest" : ios ? "ios" : android ? "android" : "ordi";
     if (os === "ordi") document.documentElement.classList.add("ordi");
 
+    // Lien des publicités (?go=1) : le téléphone part tout de suite vers son magasin officiel.
+    // Sans ?go, ou sur ordinateur, la page s'affiche normalement.
+    if (/[?&]go=1\b/.test(location.search)) {
+      var dest = os === "ios" ? "https://apps.apple.com/fm/app/hez-jouj-moroccan-card-game/id6816143591"
+               : os === "android" ? MAGASINS.android.url
+               : os === "quest" ? MAGASINS.quest.url : null;
+      if (dest) { location.replace(dest); return; }
+    }
+
     // badges des trois cartes
     ["ios", "android", "quest"].forEach(function (k) {
       document.querySelector('[data-badge="' + k + '"]').innerHTML = badge(k);
@@ -328,7 +338,6 @@
     // Il ajoute seulement Google Play, juste après l'App Store, le jour où l'app y sera.
     var cta = document.getElementById("cta");
     if (MAGASINS.android.dispo) {
-      cta.querySelector(".b-apple").parentNode.insertAdjacentHTML("afterend", badge("android"));
       cta.querySelector(".note").textContent = "Gratuit sur iPhone, Android et Meta Quest";
     } else if (os === "android") {
       cta.insertAdjacentHTML("beforeend", '<p class="autre">Sur Android, Hez Jouj arrive très bientôt sur Google Play.</p>');
